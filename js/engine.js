@@ -42,6 +42,13 @@ var Engine = (function(global) {
         var now = Date.now(),
             dt = (now - lastTime) / 1000.0;
 
+        if (collisionsHappend()) {
+          player.reset();
+        }
+
+        if (playerWon()) {
+          player.reset();
+        }
         /* Call our update/render functions, pass along the time delta to
          * our update function since it may be used for smooth animation.
          */
@@ -138,6 +145,22 @@ var Engine = (function(global) {
 
 
         renderEntities();
+    }
+
+    function collisionsHappend() {
+      var collisions = false;
+      allEnemies.forEach(function(enemy) {
+        if (enemy.row === player.row) {
+          if (player.x >= enemy.x && player.x <= enemy.x + 101) {
+            collisions = true;
+          }
+        }
+      });
+      return collisions;
+    }
+
+    function playerWon() {
+      return player.row === 0;
     }
 
     /* This function is called by the render function and is called on each game
