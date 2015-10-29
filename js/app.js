@@ -78,13 +78,20 @@ Player.prototype.handleInput = function(direction) {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-var enemiesY = [83 - 20, 83 * 2 - 20, 83 * 3 - 20];
+var allEnemies = [];
+// 100 enemies in row 2
+for (var i = 0; i < 10; i++) {
+  allEnemies.push(new Enemy(3, -i*500, 2));
+}
 
-var allEnemies = [
-  new Enemy(2, 0, 1),
-  new Enemy(3, 0, 2),
-  new Enemy(4, 0, 3)
-];
+// 100 enemies in row 3
+for (var i = 0; i < 10; i++) {
+  allEnemies.push(new Enemy(2, -i*500, 3));
+}
+// 100 enemies in row 4
+for (var i = 0; i < 10; i++) {
+  allEnemies.push(new Enemy(1, -i*500, 4));
+}
 
 var player = new Player(5, 2);
 
